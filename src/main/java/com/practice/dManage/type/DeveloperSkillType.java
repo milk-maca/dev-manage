@@ -7,8 +7,8 @@ package com.practice.dManage.type;
 @AllArgsConstructor
 @Getter
 public enum DeveloperSkillType {
-    FE("프론트엔드"),
-    BE("백엔드"),
+    FRONT_END("프론트엔드"),
+    BACK_END("백엔드"),
     FULL_STACK("풀스택");
 
     private final String description;
