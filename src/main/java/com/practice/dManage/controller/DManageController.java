@@ -3,6 +3,7 @@ package com.practice.dManage.controller;
 import com.practice.dManage.dto.CreateDeveloper;
 import com.practice.dManage.dto.DeveloperDetailDto;
 import com.practice.dManage.dto.DeveloperDto;
+import com.practice.dManage.dto.EditDeveloper;
 import com.practice.dManage.service.DManageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
 
 
 @Slf4j
@@ -23,21 +23,41 @@ public class DManageController {
     public List<DeveloperDto> getAllDevelopers() {
         log.info("GET /developers HTTP/1.1");
 
-        return dManageService.getAllDevelopers();
+        return dManageService.getAllEmployedDevelopers();
     }
 
     @GetMapping("/developer/{memberId}")
-    public DeveloperDetailDto getDeveloperDetail(@PathVariable String memberId) {
+    public DeveloperDetailDto getDeveloperDetail(
+            @PathVariable String memberId) {
         log.info("GET /developers HTTP/1.1");
 
         return dManageService.getDeveloperDetail(memberId);
     }
 
     @PostMapping("/create-developers")
-    public CreateDeveloper.Response createDevelopers(@Valid @RequestBody CreateDeveloper.Request request) {
+    public CreateDeveloper.Response createDevelopers(
+            @Valid @RequestBody CreateDeveloper.Request request) {
         log.info("request : {}", request);
 
         return dManageService.createDeveloper(request);
+    }
+
+    @PutMapping("/developer/{memberId}")
+    public DeveloperDetailDto editDeveloper(
+            @PathVariable String memberId,
+            @Valid @RequestBody EditDeveloper.Request request
+
+    ) {
+        log.info("PUT/developers HTTP/1.1");
+
+        return dManageService.editDeveloper(memberId, request);
+    }
+
+    @DeleteMapping("/developer/{memberId}")
+    public DeveloperDetailDto deleteDeveloper(
+        @PathVariable String memberId
+    ){
+        return dManageService.deleteDeveloper(memberId);
     }
 }
 
