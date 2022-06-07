@@ -1,14 +1,13 @@
 package com.practice.dManage.controller;
 
-import com.practice.dManage.dto.CreateDeveloper;
-import com.practice.dManage.dto.DeveloperDetailDto;
-import com.practice.dManage.dto.DeveloperDto;
-import com.practice.dManage.dto.EditDeveloper;
+import com.practice.dManage.dto.*;
+import com.practice.dManage.exception.DManageException;
 import com.practice.dManage.service.DManageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -55,9 +54,25 @@ public class DManageController {
 
     @DeleteMapping("/developer/{memberId}")
     public DeveloperDetailDto deleteDeveloper(
-        @PathVariable String memberId
-    ){
+            @PathVariable String memberId
+    ) {
         return dManageService.deleteDeveloper(memberId);
+    }
+
+    @ExceptionHandler(DManageException.class)
+    public DManageErrorResponse handleException(
+            DManageException e,
+            HttpServletRequest request
+    ){
+        log.error("errorCode: {}, url: {}, message:{}",
+                e.getDManageErrorCode(),
+                request.getRequestURI(),
+                e.getDetailMessage()
+        );
+        return DManageErrorResponse.builder()
+                .errorCode(e.getDManageErrorCode())
+                .errorMessage(e.getDetailMessage())
+                .build();
     }
 }
 

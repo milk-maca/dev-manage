@@ -1,5 +1,8 @@
 package com.practice.dManage.exception;
 
+import lombok.Getter;
+
+@Getter
 public class DManageException extends RuntimeException{
     private DManageErrorCode dManageErrorCode;
     private String detailMessage;
