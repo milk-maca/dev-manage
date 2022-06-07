@@ -1,4 +1,4 @@
-package com.practice.dManage.service.repository;
+package com.practice.dManage.repository;
 
 import com.practice.dManage.entity.Developer;
 import com.practice.dManage.entity.RetiredDeveloper;
