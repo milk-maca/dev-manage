@@ -60,21 +60,6 @@ public class DManageController {
         return dManageService.deleteDeveloper(memberId);
     }
 
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    @ExceptionHandler(DManageException.class)
-    public DManageErrorResponse handleException(
-            DManageException e,
-            HttpServletRequest request
-    ){
-        log.error("errorCode: {}, url: {}, message:{}",
-                e.getDManageErrorCode(),
-                request.getRequestURI(),
-                e.getDetailMessage()
-        );
-        return DManageErrorResponse.builder()
-                .errorCode(e.getDManageErrorCode())
-                .errorMessage(e.getDetailMessage())
-                .build();
-    }
+
 }
 

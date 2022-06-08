@@ -50,8 +50,10 @@ public class DManageService {
         validateDeveloperLevel(
                 request.getDeveloperLevel(),
                 request.getExperienceYears());
-        developerRepository.findByMemberId(request.getMemberId()).ifPresent((developer) -> {
-            throw new DManageException(DUPLICATED_MEMBER_ID);
+        developerRepository
+                .findByMemberId(request.getMemberId())
+                .ifPresent((developer) -> {
+                    throw new DManageException(DUPLICATED_MEMBER_ID);
         });
     }
 
