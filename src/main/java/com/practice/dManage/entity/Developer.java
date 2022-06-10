@@ -39,8 +39,9 @@ public class Developer {
     private Integer age;
 
     /*
-        Main 메서드에 @EnableJpaAuditing 추가
-        생성 및 마지막 수정 시점을 저장
+        Main 메서드에 @EnableJpaAuditing 를 추가해  Auditing 기능을 활성화
+        @EntityListeners(AuditingEntityListener.class),
+        @CreatedDate, @LastModifiedDate 를 사용해 생성 및 마지막 수정 시점을 저장
     */
     @CreatedDate
     private LocalDateTime createdAt;
